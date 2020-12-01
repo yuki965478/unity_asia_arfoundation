@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;  //引用 Foundation API
+using UnityEngine.XR.ARSubsystems;  //引用 Foundation API
 using System.Collections.Generic;  //引用 系統.一班 包含清單 List
 
 
@@ -31,7 +32,12 @@ public class ARManager : MonoBehaviour
             print(pointMouse);  //輸出座標測試用
         }
         //判斷設限是否打到物件
-        //生成物件
+        if (arManager.Raycast(pointMouse,hits,TrackableType.PlaneWithinPolygon)) 
+        {
+            //生成物件
+            Instantiate(obj, hits[0].pose.position, Quaternion.identity);
+        }
+
     }
     private void Update()
     {
